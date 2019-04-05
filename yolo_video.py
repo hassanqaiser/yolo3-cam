@@ -1,20 +1,16 @@
 # USAGE
-# python yolo_video.py --input videos/airport.mp4 --output output/airport_output.avi --yolo yolo-coco
+# python yolo_video.py --yolo yolo-coco
 
 # import the necessary packages
 import numpy as np
 import argparse
-import imutils
 import time
 import cv2
 import os
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--input", required=True,
-	help="path to input video")
-ap.add_argument("-o", "--output", required=True,
-	help="path to output video")
+
 ap.add_argument("-y", "--yolo", required=True,
 	help="base path to YOLO directory")
 ap.add_argument("-c", "--confidence", type=float, default=0.5,
@@ -43,9 +39,8 @@ net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 ln = net.getLayerNames()
 ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 
-# initialize the video stream, pointer to output video file, and
-# frame dimensions
-#vs = cv2.VideoCapture(args["input"])
+# initialize the cam stream
+
 vs = cv2.VideoCapture(0)
 (W, H) = (None, None)
 
